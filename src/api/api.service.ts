@@ -42,13 +42,14 @@ export class ApiService {
         // 添加代理，很重要
         {
           proxy: {
-            host: '127.0.0.1',
+            host: 'localhost',
             port: 7890,
             protocol: 'socks5',
           },
         },
       );
       const { id, choices } = completion.data;
+      this.logger.log(`Completion ID: ${id},Choices: ${choices}`);
       return {
         id,
         text: choices[0].text,
