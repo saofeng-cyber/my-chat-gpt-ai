@@ -39,7 +39,7 @@ export class ApiService {
           frequency_penalty: 0,
           presence_penalty: 0,
         },
-        // 添加代理，很重要
+        // 添加代理，很重要(部署的时候需要注释掉)
         {
           proxy: {
             host: 'localhost',
