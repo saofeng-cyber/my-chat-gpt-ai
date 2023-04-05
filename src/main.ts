@@ -8,7 +8,7 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
-  app.setGlobalPrefix('openai');
+  // app.setGlobalPrefix('openai');
   // 全局使用管道：这里使用的是内置，也可以使用自定义管道，在下文
   app.useGlobalPipes(
     new ValidationPipe({
