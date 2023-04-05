@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { CompletionApiDto } from './dto/completion-api.dto';
 import { Configuration, OpenAIApi } from 'openai';
 import * as dotenv from 'dotenv'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { ChatApiDto } from './dto/chat-api.dto';
 dotenv.config();
 
 @Injectable()
@@ -49,11 +50,45 @@ export class ApiService {
           },
         },
       );
-      const { id, choices } = completion.data;
+      const { id, choices, usage } = completion.data;
       this.logger.log(`Completion ID: ${id},Choices: ${choices}`);
       return {
         id,
         text: choices[0].text,
+        usage,
+      };
+    } catch (error) {
+      this.logger.error(error.message);
+      return error.message;
+    }
+  }
+  async sendChatMessage(chatApiDto: ChatApiDto) {
+    try {
+      const completion = await this.openai.createChatCompletion(
+        {
+          model: chatApiDto.model,
+          messages: chatApiDto.messages,
+          temperature: chatApiDto.temperature,
+          top_p: chatApiDto.top_p,
+          n: chatApiDto.n,
+          frequency_penalty: chatApiDto.frequency_penalty,
+          presence_penalty: chatApiDto.presence_penalty,
+        },
+        // 添加代理，很重要(部署的时候需要注释掉)
+        // {
+        //   proxy: {
+        //     host: 'localhost',
+        //     port: 7890,
+        //     protocol: 'socks5',
+        //   },
+        // },
+      );
+      const { id, choices, usage } = completion.data;
+      this.logger.log(`Completion ID: ${id},Choices: ${choices}`);
+      return {
+        id,
+        content: choices[0].message.content,
+        usage,
       };
     } catch (error) {
       this.logger.error(error.message);

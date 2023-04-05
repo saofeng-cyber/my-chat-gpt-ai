@@ -3,6 +3,7 @@ export class CompletionApiDto {
   @IsNotEmpty({
     message: 'model is required',
   })
+  @IsNotEmpty()
   @IsString()
   readonly model: string;
   readonly prompt: string;

@@ -1,11 +1,14 @@
-import { IsNotEmpty, IsString } from 'class-validator';
-export class CompletionApiDto {
+import { ArrayNotEmpty, IsNotEmpty, IsString } from 'class-validator';
+import { ChatCompletionRequestMessage } from 'openai';
+export class ChatApiDto {
   @IsNotEmpty({
     message: 'model is required',
   })
+  @IsNotEmpty()
   @IsString()
   readonly model: string;
-  readonly prompt: string;
+  @ArrayNotEmpty()
+  readonly messages: Array<ChatCompletionRequestMessage>;
   readonly temperature: number;
   readonly top_p: number;
   readonly n: number;
