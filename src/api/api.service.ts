@@ -42,13 +42,13 @@ export class ApiService {
           presence_penalty: completionApiDto.presence_penalty,
         },
         // 添加代理，很重要(部署的时候需要注释掉)
-        {
-          proxy: {
-            host: 'localhost',
-            port: 7890,
-            protocol: 'socks5',
-          },
-        },
+        // {
+        //   proxy: {
+        //     host: 'localhost',
+        //     port: 7890,
+        //     protocol: 'socks5',
+        //   },
+        // },
       );
       const { id, choices, usage } = completion.data;
       this.logger.log(`Completion ID: ${id},Choices: ${choices}`);
@@ -75,13 +75,13 @@ export class ApiService {
           presence_penalty: chatApiDto.presence_penalty,
         },
         // 添加代理，很重要(部署的时候需要注释掉)
-        {
-          proxy: {
-            host: 'localhost',
-            port: 7890,
-            protocol: 'socks5',
-          },
-        },
+        // {
+        //   proxy: {
+        //     host: 'localhost',
+        //     port: 7890,
+        //     protocol: 'socks5',
+        //   },
+        // },
       );
       const { id, choices, usage } = completion.data;
       this.logger.log(`Completion ID: ${id},Choices: ${choices}`);
