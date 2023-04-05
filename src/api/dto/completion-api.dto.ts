@@ -6,6 +6,7 @@ export class CompletionApiDto {
   @IsString()
   readonly model: string;
   readonly prompt: string;
+  readonly max_tokens: number;
   readonly temperature: number;
   readonly top_p: number;
   readonly n: number;

@@ -33,11 +33,12 @@ export class ApiService {
         {
           model: completionApiDto.model,
           prompt: completionApiDto.prompt,
-          temperature: 0.5,
-          top_p: 1,
-          n: 1,
-          frequency_penalty: 0,
-          presence_penalty: 0,
+          max_tokens: completionApiDto.max_tokens,
+          temperature: completionApiDto.temperature,
+          top_p: completionApiDto.top_p,
+          n: completionApiDto.n,
+          frequency_penalty: completionApiDto.frequency_penalty,
+          presence_penalty: completionApiDto.presence_penalty,
         },
         // 添加代理，很重要(部署的时候需要注释掉)
         {
